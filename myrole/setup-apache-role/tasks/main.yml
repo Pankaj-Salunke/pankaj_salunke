@@ -1,0 +1,17 @@
+---
+
+
+- name: install httpd package
+  yum:
+    name: "{{httpd_package_name}}"
+    state: installed
+  when: ansible_os_family=="RedHat"
+  notify: start httpd service
+
+
+- name: copy index file
+  copy :
+    src: index.html
+    dest: /var/www/html/
+    mode: 0666
+
